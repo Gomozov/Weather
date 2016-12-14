@@ -2,7 +2,8 @@ defmodule Weather.Yandex do
   import Weather.TableFormatter, only: [print_table_for_columns: 2]
   use HTTPoison.Base
 
-  @default_adress "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22nome%2C%20ak%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys"
+  @default_adress "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%3D2013922%20and%20u%3D%27c%27&format=json"
+
   @expected_fields ~w(
                       atmosphere forecast item
                      )
