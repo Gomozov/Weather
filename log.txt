@@ -20,6 +20,8 @@
  %{"code" => "26", "date" => "20 Dec 2016", "day" => "Tue", "high" => "28",
    "low" => "22", "text" => "Cloudy"}]
 1.data_by_columns
+2.column_width [11, 3, 4, 3, 13]
+3.format "~-11s | ~-3s | ~-4s | ~-3s | ~-13s~n"
 3.color_text
 [["11 Dec 2016", "12 Dec 2016", "13 Dec 2016", "14 Dec 2016", "15 Dec 2016",
   "16 Dec 2016", "17 Dec 2016", "18 Dec 2016", "19 Dec 2016", "20 Dec 2016"],

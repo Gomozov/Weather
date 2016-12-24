@@ -15,7 +15,7 @@ defmodule Weather.Yandex do
   end
 
   def fetch(url) do
-    case HTTPoison.get(url) do
+    case HTTPoison.get(url, [], [recv_timeout: 10000]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} -> body
       {:ok, %HTTPoison.Response{status_code: 404}}             -> IO.puts "Not found :("
       {:ok, %HTTPoison.Response{body: body}}                   -> IO.puts body
@@ -34,14 +34,6 @@ defmodule Weather.Yandex do
     |> Poison.decode!
     |> get_in(["query", "results", "channel", "item", "forecast"])
     |> print_table_for_columns(["date", "day", "high", "low", "text"])
-# |> Map.get("query")
-#   |> Map.get("results")
-#   |> Map.get("channel")
-#   |> Map.get("item")
-#   |> Map.get("forecast")
-#   |> Enum.map(fn (x) -> x["date"] end)
-# |> Map.take(@expected_fields)
-#|> Enum.map(fn({k, v}) -> {String.to_atom(k), v} end)
   end
 
 end
