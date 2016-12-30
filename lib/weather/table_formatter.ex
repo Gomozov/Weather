@@ -1,12 +1,15 @@
 defmodule Weather.TableFormatter do
-  import Enum, only: [ each: 2, map: 2, map_join: 3, max: 1 ]
+  import Enum, only: [ map: 2, map_join: 3, max: 1 ]
 
   def print_table_for_columns(rows, headers) do
-    data_by_columns         = split_into_columns(rows, headers)       #объединение сырых данных в столбцы
+    IO.write("\e[33m\e[1mFrom #{Kernel.inspect(self)}\e[0m: ")
+    IO.puts get_in(rows, ["title"])
+    data_by_columns = split_into_columns(get_in(rows, ["forecast"]), headers) #объединение сырых данных в столбцы
     data_with_headers       = add_headers(data_by_columns, headers)   #добавление заголовков к столбцам
     column_widths           = widths_of(data_with_headers)            #определение максимальной ширины столбца
     format                  = format_for(column_widths)               #формат для заголовка
     formatted_columns       = split_into_map(column_widths, data_by_columns) #Map из форматов и строк
+    IO.puts                   separator(column_widths)                #Печатаем разделитель
     puts_one_line_in_columns  headers, format                         #Форматируем и печатаем заголовки
     IO.puts                   separator(column_widths)                #Печатаем разделитель
     puts_in_columns           formatted_columns                       #Форматируем и печатаем строки
